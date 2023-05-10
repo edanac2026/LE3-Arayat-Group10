@@ -20,31 +20,33 @@
 
             function displayList() {
                 document.getElementById("myList").innerHTML = "";
-                for(var a=0; a<fullname.length; a++) {
-                    document.getElementById("myList").innerHTML += '<li class="list-group-item">' + fullname[a] + '</li>';
+                for(var i=0; i<fullname.length; i++) {
+                    document.getElementById("myList").innerHTML += '<li class="list-group-item">' + fullname[i] + '</li>';
                 }
             }
 
             function addToList(item) {
                 fullname.push(item);
                 displayList();
-                localStorage.setItem("firstname",JSON.stringify(fullname));
+                localStorage.setItem("fullname",JSON.stringify(fullname));
             }
 
             function getItem() {
-                var a = document.getElementById("nameInput").value;
-                addToList(a);
+                var i = document.getElementById("nameInput").value;
+                addToList(i);
             }
 
             function loadList() {
-                if(JSON.parse(localStorage.getItem('firstname') != null))
-                    fullname = JSON.parse(localStorage.getItem('firstname'));
+                if(JSON.parse(localStorage.getItem('fullname') != null))
+                    fullname = JSON.parse(localStorage.getItem('fullname'));
                 displayList();
             }
 
+            function 
+
         </script>
     </head>
-    <body class="container" onload="loadList">
+    <body class="container" onload="loadList()">
         <h3>Contact Number</h3>
         <div class="mb-3">
             <input type="text" class="form-control" id="nameInput" placeholder="First Name">
