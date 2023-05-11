@@ -14,21 +14,27 @@
         </style>
 
         <script>
-            var fullname = [];
-            var address = [];
-            var contacts = [];
+            var contactlist = [];
 
             function displayList() {
                 document.getElementById("myList").innerHTML = "";
-                for(var i=0; i<fullname.length; i++) {
-                    document.getElementById("myList").innerHTML += '<li class="list-group-item">' + fullname[i] + '</li>';
+                for(var i=0; i<contactlist.length; i++) {
+                    document.getElementById("myList").innerHTML += '<li class="list-group-item" onclick="show()" id="'+ i + '">' + contactlist[i].name + '</li>';
                 }
             }
 
             function addToList(item) {
-                fullname.push(item);
+                let fullname = document.getElementById("nameInput").value;
+                let address = document.getElementById("addressInput").value;
+                let number = document.getElementById("contactInput").value;
+                let person = {name: fullname, address: address, number: number};
+                document.getElementById("nameInput").value = "";
+                document.getElementById("addressInput").value = "";
+                document.getElementById("contactInput").value = "";
+                console.log(person);
+                contactlist.push(person);
                 displayList();
-                localStorage.setItem("fullname",JSON.stringify(fullname));
+                localStorage.setItem("fullname",JSON.stringify(contactlist));
             }
 
             function getItem() {
@@ -37,12 +43,16 @@
             }
 
             function loadList() {
-                if(JSON.parse(localStorage.getItem('fullname') != null))
-                    fullname = JSON.parse(localStorage.getItem('fullname'));
+                if(JSON.parse(localStorage.getItem('contactlist') != null))
+                    contactlist = JSON.parse(localStorage.getItem('contactlist'));
                 displayList();
             }
-
-            function 
+            function show(){
+                let index = event.srcElement.id;
+                document.getElementById("nameInput").value = contactlist[index].name;
+                document.getElementById("addressInput").value = contactlist[index].address;
+                document.getElementById("contactInput").value = contactlist[index].number;
+            }
 
         </script>
     </head>
